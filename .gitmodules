@@ -2,3 +2,7 @@
 	path = tree-sitter
 	url = https://github.com/tree-sitter/tree-sitter
 	branch = release-0.25
+[submodule "grammars/tree-sitter-devicetree"]
+	path = grammars/tree-sitter-devicetree
+	url = https://github.com/joelspadin/tree-sitter-devicetree.git
+	branch = main
