@@ -13,7 +13,10 @@
         <maven.compiler.target>22</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.jupiter.version>5.10.0</junit.jupiter.version>
-        <jextract.skip>true</jextract.skip>
+        <jextract.skip>false</jextract.skip>
+        <libs.build.scripts.base>${basedir}/scripts/treesitter-build</libs.build.scripts.base>
+        <treesitter4j.lib.skip>false</treesitter4j.lib.skip>
+        <treesitter4j.lib.dir>${project.build.outputDirectory}/treesitter4j-lib</treesitter4j.lib.dir>
     </properties>
 
     <dependencies>
@@ -46,6 +49,7 @@
                 <version>3.6.0</version>
                 <executions>
                     <execution>
+                        <id>jextract-source</id>
                         <phase>generate-sources</phase>
                         <goals>
                             <goal>add-source</goal>
@@ -62,6 +66,27 @@
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>3.1.0</version>
                 <executions>
+                    <execution>
+                        <id>treesitter4j-lib</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${treesitter4j.lib.skip}</skip>
+                            <target name="treesitter4j-lib">
+                                <echo level="info">Generating tree-sitter core library and parsers</echo>
+                                <mkdir dir="${treesitter4j.lib.dir}"/>
+                                <exec executable="python" failonerror="true">
+                                    <arg value="${libs.build.scripts.base}/treesitter.py"/>
+                                    <arg value="--source-dir"/>
+                                    <arg value="${basedir}/tree-sitter/lib"/>
+                                    <arg value="--output-dir"/>
+                                    <arg value="${treesitter4j.lib.dir}"/>
+                                </exec>
+                            </target>
+                        </configuration>
+                    </execution>
                     <execution>
                         <id>jextract</id>
                         <phase>generate-sources</phase>
@@ -86,6 +111,11 @@
                                     <arg value="${project.basedir}/scripts/jextract.sh"/>
                                     <arg value="${project.basedir}"/>
                                     <arg value="${project.build.directory}"/>
+                                </exec>
+                                <exec executable="python" failonerror="true">
+                                    <arg value="${project.basedir}/scripts/treesitter_java_patch.py"/>
+                                    <arg value="--file-path"/>
+                                    <arg value="${project.build.directory}/generated-sources/jextract/io/javaside/treesitter4j/internal/TreeSitter.java"/>
                                 </exec>
                             </target>
                         </configuration>

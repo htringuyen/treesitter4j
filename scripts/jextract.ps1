@@ -197,7 +197,6 @@ $lib = "$($args[0])/tree-sitter/lib"
     --header-class-name TreeSitter `
     --output $output `
     -t $package `
-    -l libtree-sitter `
     -I "$lib/src" `
     -I "$lib/include" `
     -DTREE_SITTER_HIDE_SYMBOLS `

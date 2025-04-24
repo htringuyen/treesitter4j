@@ -12,15 +12,6 @@ public final class TreeSitterJava {
     private final Arena arena = Arena.ofAuto();
     private final SymbolLookup symbols = findLibrary();
 
-    static {
-        try {
-            Class.forName("io.javaside.treesitter4j.internal.LibraryPatch");
-        }
-        catch (ClassNotFoundException e) {
-            throw new RuntimeException();
-        }
-    }
-
     /**
      * {@snippet lang=c :
      * const TSLanguage *tree_sitter_java()
