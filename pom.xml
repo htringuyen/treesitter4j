@@ -15,8 +15,9 @@
         <junit.jupiter.version>5.10.0</junit.jupiter.version>
         <jextract.skip>false</jextract.skip>
         <libs.build.scripts.base>${basedir}/scripts/treesitter-build</libs.build.scripts.base>
-        <treesitter4j.lib.skip>false</treesitter4j.lib.skip>
+        <treesitter4j.lib.core.skip>false</treesitter4j.lib.core.skip>
         <treesitter4j.lib.dir>${project.build.outputDirectory}/treesitter4j-lib</treesitter4j.lib.dir>
+        <treesitter4j.lib.grammars.skip>false</treesitter4j.lib.grammars.skip>
     </properties>
 
     <dependencies>
@@ -67,20 +68,41 @@
                 <version>3.1.0</version>
                 <executions>
                     <execution>
-                        <id>treesitter4j-lib</id>
+                        <id>treesitter4j-lib-core</id>
                         <phase>generate-resources</phase>
                         <goals>
                             <goal>run</goal>
                         </goals>
                         <configuration>
-                            <skip>${treesitter4j.lib.skip}</skip>
-                            <target name="treesitter4j-lib">
-                                <echo level="info">Generating tree-sitter core library and parsers</echo>
+                            <skip>${treesitter4j.lib.core.skip}</skip>
+                            <target name="treesitter4j-lib-core">
+                                <echo level="info">Generating tree-sitter core library</echo>
                                 <mkdir dir="${treesitter4j.lib.dir}"/>
                                 <exec executable="python" failonerror="true">
                                     <arg value="${libs.build.scripts.base}/treesitter.py"/>
                                     <arg value="--source-dir"/>
                                     <arg value="${basedir}/tree-sitter/lib"/>
+                                    <arg value="--output-dir"/>
+                                    <arg value="${treesitter4j.lib.dir}"/>
+                                </exec>
+                            </target>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>treesitter4j-lib-grammars</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${treesitter4j.lib.grammars.skip}</skip>
+                            <target name="treesitter4j-lib-grammars">
+                                <echo level="info">Generating tree-sitter parsers</echo>
+                                <mkdir dir="${treesitter4j.lib.dir}"/>
+                                <exec executable="python" failonerror="true">
+                                    <arg value="${libs.build.scripts.base}/grammars.py"/>
+                                    <arg value="--grammars-dir"/>
+                                    <arg value="${basedir}/grammars"/>
                                     <arg value="--output-dir"/>
                                     <arg value="${treesitter4j.lib.dir}"/>
                                 </exec>

@@ -15,3 +15,7 @@ buildNumber.properties
 .project
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
+.idea
+tree-sitter/
+grammars/
+!grammars/grammars.txt
