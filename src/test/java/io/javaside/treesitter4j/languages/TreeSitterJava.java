@@ -1,5 +1,7 @@
 package io.javaside.treesitter4j.languages;
 
+import io.javaside.treesitter4j.util.Utils;
+
 import java.lang.foreign.*;
 
 public final class TreeSitterJava {
@@ -23,8 +25,7 @@ public final class TreeSitterJava {
 
     private SymbolLookup findLibrary() {
         try {
-            var library = System.mapLibraryName("tree-sitter-java");
-            return SymbolLookup.libraryLookup(library, arena);
+            return Utils.findLibraryFromClassPath("/libtree-sitter-java", arena);
         } catch (IllegalArgumentException e) {
             return SymbolLookup.loaderLookup();
         }
