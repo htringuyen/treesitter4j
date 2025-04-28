@@ -7,10 +7,11 @@ This is a fork of [java-tree-sitter](https://github.com/tree-sitter/java-tree-si
 
 ## Building
 
-- Requires Java 22+ and a compatible maven
-- Requires python (tested in python 3.11) for scripting
-- Requires cmake and GCC compiler (e.g. MinGW GCC for Windows) for auto build of native libraries
-- Requires [jextract-22](https://jdk.java.net/jextract/) for generating of Java bindings
+### Requirements
+- Java 22+ and a compatible maven
+- python (tested in python 3.11) for scripting
+- cmake and GCC compiler (e.g. MinGW GCC for Windows) for auto build of native libraries
+- [jextract-22](https://jdk.java.net/jextract/) for generating of Java bindings
 
 ```bash
 git clone https://github.com/htringuyen/treesitter4j
