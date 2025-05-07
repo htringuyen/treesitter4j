@@ -2,9 +2,13 @@ package io.javaside.treesitter4j.util;
 
 import io.javaside.treesitter4j.internal.ChainedLibraryLookup;
 
+import java.io.IOException;
 import java.lang.foreign.*;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 public class Utils {
 
@@ -19,13 +23,19 @@ public class Utils {
     public static SymbolLookup findLibraryFromClassPath(String libNameWithoutExtension, Arena arena) {
         try {
             var libName = System.mapLibraryName(libNameWithoutExtension);
-            var library = ChainedLibraryLookup.class.getResource(libName);
-            if (library == null) {
-                throw new RuntimeException("Library not found in classpath: " + libName);
+            Path libPath;
+            try (var binaryIn = ChainedLibraryLookup.class.getResourceAsStream(libName)) {
+                if (binaryIn == null) {
+                    throw new IllegalArgumentException("Library not found in classpath: " + libName);
+                }
+                var tempFile = Files.createTempFile(
+                        "_treesitter4j_" + libName.replace("/", "."), null);
+                Files.copy(binaryIn, tempFile, StandardCopyOption.REPLACE_EXISTING);
+                tempFile.toFile().deleteOnExit();
+                libPath = tempFile.toAbsolutePath();
             }
-            var libPath = Paths.get(library.toURI()).toAbsolutePath();
             return SymbolLookup.libraryLookup(libPath, arena);
-        } catch (IllegalArgumentException | URISyntaxException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
