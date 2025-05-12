@@ -1,0 +1,3 @@
+tree-sitter-devicetree
+tree-sitter-java
+tree-sitter-kconfig

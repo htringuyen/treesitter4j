@@ -6,7 +6,7 @@ import shutil
 import common
 
 def build_parsers(grammars_dir, output_dir):
-    with open(os.path.join(grammars_dir, "grammars.txt"), "r") as file:
+    with open(os.path.join(grammars_dir, "included_grammars.txt"), "r") as file:
         grammar_names = [line.strip() for line in file if line.strip()]
 
     for grammar_name in grammar_names:

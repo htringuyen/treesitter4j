@@ -6,7 +6,7 @@
 
     <groupId>io.javaside</groupId>
     <artifactId>treesitter4j-windows</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.2</version>
 
     <properties>
         <maven.compiler.source>22</maven.compiler.source>

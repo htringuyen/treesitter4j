@@ -9,7 +9,11 @@ import java.util.HashMap;
 
 public class BuiltinLanguageLibrary implements LanguageLibrary {
 
-    public static final String DEVICETREE_LIB = "libtree-sitter-devicetree";
+    public static final String TS_DEVICETREE = "libtree-sitter-devicetree";
+
+    public static final String TS_KCONFIG = "libtree-sitter-kconfig";
+
+    public static final String TS_JAVA = "libtree-sitter-java";
 
     private static final HashMap<String, LanguageLibrary> LIBRARY_CACHE = new HashMap<>();
 
@@ -35,7 +39,9 @@ public class BuiltinLanguageLibrary implements LanguageLibrary {
     }
 
     static {
-        LIB_INIT_FUNCTIONS.put(DEVICETREE_LIB, "tree_sitter_devicetree");
+        LIB_INIT_FUNCTIONS.put(TS_DEVICETREE, "tree_sitter_devicetree");
+        LIB_INIT_FUNCTIONS.put(TS_KCONFIG, "tree_sitter_kconfig");
+        LIB_INIT_FUNCTIONS.put(TS_JAVA, "tree_sitter_java");
     }
 
     @Override
