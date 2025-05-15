@@ -18,10 +18,15 @@ public class BuiltinLanguageLibraryTest {
         assertNotNull(loadLanguage(BuiltinLanguageLibrary.TS_KCONFIG));
     }
 
-    /*@Test
+    @Test
     void testLoadLanguage_Java() {
         assertNotNull(loadLanguage(BuiltinLanguageLibrary.TS_JAVA));
-    }*/
+    }
+
+    @Test
+    void testLoadLanguage_C() {
+        assertNotNull(loadLanguage(BuiltinLanguageLibrary.TS_C));
+    }
 
     private MemorySegment loadLanguage(String libName) {
         var lib = BuiltinLanguageLibrary.getLibrary(libName);

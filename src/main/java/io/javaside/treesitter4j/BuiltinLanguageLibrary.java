@@ -15,6 +15,8 @@ public class BuiltinLanguageLibrary implements LanguageLibrary {
 
     public static final String TS_JAVA = "libtree-sitter-java";
 
+    public static final String TS_C = "libtree-sitter-c";
+
     private static final HashMap<String, LanguageLibrary> LIBRARY_CACHE = new HashMap<>();
 
     private static final HashMap<String, String> LIB_INIT_FUNCTIONS = new HashMap<>();
@@ -42,6 +44,7 @@ public class BuiltinLanguageLibrary implements LanguageLibrary {
         LIB_INIT_FUNCTIONS.put(TS_DEVICETREE, "tree_sitter_devicetree");
         LIB_INIT_FUNCTIONS.put(TS_KCONFIG, "tree_sitter_kconfig");
         LIB_INIT_FUNCTIONS.put(TS_JAVA, "tree_sitter_java");
+        LIB_INIT_FUNCTIONS.put(TS_C, "tree_sitter_c");
     }
 
     @Override

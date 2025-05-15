@@ -3,6 +3,8 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/grammars/tree-sitter-devicetree" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/grammars/tree-sitter-java" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/grammars/tree-sitter-kconfig" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/tree-sitter" vcs="Git" />
   </component>
 </project>

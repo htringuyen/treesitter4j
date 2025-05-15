@@ -14,3 +14,7 @@
 	path = grammars/tree-sitter-java
 	url = https://github.com/tree-sitter/tree-sitter-java.git
 	branch = master
+[submodule "grammars/tree-sitter-c"]
+	path = grammars/tree-sitter-c
+	url = https://github.com/tree-sitter/tree-sitter-c.git
+	branch = master
